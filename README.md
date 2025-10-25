@@ -14,9 +14,12 @@
    ```
    npm install @vitejs/plugin-react
    ```
+   ```
    npm install lucide-react
    ```
+   ```
    npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/google-calendar @fullcalendar/interaction
+   ```
    ```
    npm run dev
    ```
