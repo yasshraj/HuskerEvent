@@ -19,6 +19,7 @@
    npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/google-calendar @fullcalendar/interaction
    ```
    npm run dev
+   ```
 
 5. Open the local address shown by Vite (usually http://localhost:5173)
 
