@@ -2,7 +2,7 @@
 import React from 'react';
 import { UserCircle, Plus, Search } from 'lucide-react';
 
-const Header = () => (
+const Header = ({ onCreateClick }) => (
   <header className="bg-red-700 text-white p-4 flex items-center justify-between shadow-lg">
     {/* Logo */}
     <div className="flex items-center">
@@ -26,7 +26,10 @@ const Header = () => (
 
     {/* Actions */}
     <div className="flex items-center gap-4">
-      <button className="flex items-center gap-2 bg-white text-gray-900 font-semibold py-2 px-5 rounded-full shadow-md hover:bg-gray-200 transition-colors">
+      <button
+        onClick={onCreateClick}
+        className="flex items-center gap-2 bg-white text-gray-900 font-semibold py-2 px-5 rounded-full shadow-md hover:bg-gray-200 transition-colors"
+      >
         <Plus size={20} />
         <span>Create Event</span>
       </button>
