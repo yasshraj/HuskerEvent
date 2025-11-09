@@ -1,66 +1,33 @@
-<<<<<<< Updated upstream
-// ./App.jsx
-import React from 'react';
-import Header from './components/Header.jsx';
-import Calendar from './components/Calendar.jsx';
-import EventCard from './components/EventCard.jsx';
-import MapView from './components/MapView.jsx';
-=======
 import React, { useMemo, useState } from "react";
 import Header from "./components/Header.jsx";
 import Calendar from "./components/Calendar.jsx";
 import EventCard from "./components/EventCard.jsx";
 import MapView from "./components/MapView.jsx";
+import EventSummary from "./components/EventSummary.jsx";
 import useEventForm from "./hooks/createEventForm.js";
 import usePersistentEvents from "./hooks/persistentEvents.js";
-import EventSummary from "./components/EventSummary.jsx";
->>>>>>> Stashed changes
 
 export default function App() {
   const apiKey = "AIzaSyAVqgZ7cFS1H6VR2ffVH1We8Z9KYkB3-D0";
 
-<<<<<<< Updated upstream
-  const events = [
-    { title: "The Union", coords: { lat: 40.8213, lng: -96.7031 } },
-    { title: "Memorial Stadium", coords: { lat: 40.8176, lng: -96.6990 } },
-  ];
-
-  return (
-    <div className="flex flex-col h-screen bg-gray-800 text-gray-200 font-sans">
-      <Header />
-        <main className="flex-1 grid grid-cols-1 md:grid-cols-12 gap-6 p-6 overflow-hidden">
-          {/* Left Column */}
-          <div className="md:col-span-5 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
-            <Calendar />
-            <EventCard title="Tech Meet" date="10/15/2025" time="18:00" location="The Union" />
-            <EventCard title="Football Exhibition" date="10/20/2025" time="19:00" location="Memorial Stadium" />
-          </div>
-
-          {/* Right Column */}
-          <div className="md:col-span-7 h-full w-full rounded-lg overflow-hidden shadow-lg">
-            <MapView apiKey={apiKey} events={events} />
-          </div>
-        </main>
-=======
-  // Map known location names to coordinates for the map pins
   const coordsByLocation = useMemo(
     () => ({
       "The Union": { lat: 40.817748017902026, lng: -96.70036127955429 },
       "Memorial Stadium": { lat: 40.82069437820795, lng: -96.70558792268038 },
       "Avery Hall": { lat: 40.81947974559484, lng: -96.7044773183429 },
-      Selleck: { lat: 40.81901427788554, lng: -96.69949222684372 },
-      Kaufmann: { lat: 40.81977928709701, lng: -96.7004736305157 },
+      "Selleck": { lat: 40.81901427788554, lng: -96.69949222684372 },
+      "Kaufmann": { lat: 40.81977928709701, lng: -96.7004736305157 },
     }),
     []
   );
 
-  // Initial demo events (only used if localStorage is empty)
   const initialEvents = [
     {
       title: "Tech Meet",
       date: "10/15/2025",
       time: "18:00",
       location: "The Union",
+      description: "Weekly student tech meetup with lightning talks.",
       coords: { lat: 40.817748017902026, lng: -96.70036127955429 },
     },
     {
@@ -68,31 +35,30 @@ export default function App() {
       date: "10/20/2025",
       time: "19:00",
       location: "Memorial Stadium",
+      description: "Big Red scrimmage and community showcase.",
       coords: { lat: 40.82069437820795, lng: -96.70558792268038 },
     },
   ];
 
-  // Events now persist in localStorage
   const [events, setEvents] = usePersistentEvents("events_v1", initialEvents);
-
-  // Selected date from the Calendar
   const [selectedDate, setSelectedDate] = useState("");
 
-  // Event form logic is moved into a hook
-  const { showForm, form, setForm, openForm, closeForm, addEvent } =
-    useEventForm(coordsByLocation, selectedDate);
+  const {
+    showForm,
+    form,
+    setForm,
+    openForm,
+    closeForm,
+    addEvent,
+  } = useEventForm(coordsByLocation, selectedDate);
 
+  // Track which event card was clicked
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedEventIndex, setSelectedEventIndex] = useState(-1);
-  const openEvent = (ev, idx) => {
-    setSelectedEvent(ev);
-    setSelectedEventIndex(idx);
-  };
-  const closeEvent = () => {
-    setSelectedEvent(null);
-    setSelectedEventIndex(-1);
-  };
+  const openEvent = (ev, idx) => { setSelectedEvent(ev); setSelectedEventIndex(idx); };
+  const closeEvent = () => { setSelectedEvent(null); setSelectedEventIndex(-1); };
 
+  // Delete only the selected event and close the modal
   const deleteSelectedEvent = () => {
     setEvents((prev) => prev.filter((_, i) => i !== selectedEventIndex));
     closeEvent();
@@ -180,9 +146,7 @@ export default function App() {
                 className="w-full rounded-md bg-gray-800 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 min-h-[90px]"
                 value={form.description}
                 placeholder="Write a short summary..."
-                onChange={(e) =>
-                  setForm({ ...form, description: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
               />
             </div>
 
@@ -227,7 +191,6 @@ export default function App() {
           </form>
         </div>
       )}
->>>>>>> Stashed changes
 
       {selectedEvent && (
         <EventSummary
@@ -239,20 +202,10 @@ export default function App() {
       )}
 
       <style>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #2d3748;
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #4a5568;
-          border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #718096;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #2d3748; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #718096; }
       `}</style>
     </div>
   );
