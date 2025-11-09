@@ -1,14 +1,16 @@
 // ./components/Header.jsx
-import React from 'react';
-import { UserCircle, Plus, Search } from 'lucide-react';
+import React from "react";
+import { UserCircle, Plus, Search } from "lucide-react";
 
-const Header = () => (
+const Header = ({ onCreateClick }) => (
   <header className="bg-red-700 text-white p-4 flex items-center justify-between shadow-lg">
     {/* Logo */}
     <div className="flex items-center">
       <div className="bg-white text-red-700 w-16 h-16 flex items-center justify-center rounded-lg">
         <span className="text-4xl font-extrabold tracking-tighter">N</span>
-        <span className="text-4xl font-extrabold tracking-tighter -ml-1.5">HE</span>
+        <span className="text-4xl font-extrabold tracking-tighter -ml-1.5">
+          HE
+        </span>
       </div>
     </div>
 
@@ -20,13 +22,20 @@ const Header = () => (
           placeholder="Search"
           className="w-full bg-black bg-opacity-30 text-white placeholder-gray-300 rounded-full py-3 px-6 pl-12 focus:outline-none focus:ring-2 focus:ring-white focus:bg-opacity-40"
         />
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={20} />
+        <Search
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300"
+          size={20}
+        />
       </div>
     </div>
 
     {/* Actions */}
     <div className="flex items-center gap-4">
-      <button className="flex items-center gap-2 bg-white text-gray-900 font-semibold py-2 px-5 rounded-full shadow-md hover:bg-gray-200 transition-colors">
+      <button
+        type="button"
+        onClick={() => onCreateClick?.()}
+        className="flex items-center gap-2 bg-white text-gray-900 font-semibold py-2 px-5 rounded-full shadow-md hover:bg-gray-200 transition-colors"
+      >
         <Plus size={20} />
         <span>Create Event</span>
       </button>

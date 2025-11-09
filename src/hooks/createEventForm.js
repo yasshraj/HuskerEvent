@@ -8,6 +8,7 @@ export default function useEventForm(coordsByLocation, selectedDate) {
     date: "",
     time: "",
     location: "",
+    description: "",
   });
 
   const todayDMY = () => {
@@ -15,7 +16,7 @@ export default function useEventForm(coordsByLocation, selectedDate) {
     const day = String(d.getDate()).padStart(2, "0");
     const month = String(d.getMonth() + 1).padStart(2, "0");
     const year = d.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `${day}/${month}/${year}`; // DD/MM/YYYY
   };
 
   const openForm = () => {
@@ -45,7 +46,7 @@ export default function useEventForm(coordsByLocation, selectedDate) {
     const coords = coordsByLocation[form.location] || null;
     setEvents((prev) => [...prev, { ...form, coords }]);
     // Reset and close
-    setForm({ title: "", date: "", time: "", location: "" });
+    setForm({ title: "", date: "", time: "", location: "", description: "" });
     setShowForm(false);
   };
 
