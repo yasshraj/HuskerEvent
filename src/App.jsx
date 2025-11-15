@@ -9,6 +9,7 @@ import usePersistentEvents from "./hooks/persistentEvents.js";
 
 export default function App() {
   const apiKey = "AIzaSyAVqgZ7cFS1H6VR2ffVH1We8Z9KYkB3-D0";
+  const [rsvp, setRsvp] = useState(false);
 
   const coordsByLocation = useMemo(
     () => ({
@@ -28,6 +29,7 @@ export default function App() {
       time: "18:00",
       location: "The Union",
       description: "Weekly student tech meetup with lightning talks.",
+      Rsvp: rsvp,
       coords: { lat: 40.817748017902026, lng: -96.70036127955429 },
     },
     {
@@ -36,6 +38,7 @@ export default function App() {
       time: "19:00",
       location: "Memorial Stadium",
       description: "Big Red scrimmage and community showcase.",
+      Rsvp: rsvp,
       coords: { lat: 40.82069437820795, lng: -96.70558792268038 },
     },
   ];
@@ -56,7 +59,16 @@ export default function App() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedEventIndex, setSelectedEventIndex] = useState(-1);
   const openEvent = (ev, idx) => { setSelectedEvent(ev); setSelectedEventIndex(idx); };
-  const closeEvent = () => { setSelectedEvent(null); setSelectedEventIndex(-1); };
+  function closeEvent() { setSelectedEvent(null); setSelectedEventIndex(-1); };
+  const onRSVP = () => {
+  setEvents((prevEvents) =>
+    prevEvents.map((ev, idx) =>
+      idx === selectedEventIndex ? { ...ev, Rsvp: !ev.Rsvp } : ev
+    )
+  );
+  closeEvent();
+};
+
 
   // Delete only the selected event and close the modal
   const deleteSelectedEvent = () => {
@@ -87,6 +99,7 @@ export default function App() {
                   date={ev.date}
                   time={ev.time}
                   location={ev.location}
+                  rsvp = {ev.Rsvp}
                   onClick={() => openEvent(ev, idx)}
                 />
               ))
@@ -196,7 +209,7 @@ export default function App() {
         <EventSummary
           event={selectedEvent}
           onClose={closeEvent}
-          onRSVP={() => {}}
+          onRSVP={onRSVP}
           onDelete={deleteSelectedEvent}
         />
       )}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EventCard = ({ title, date, time, location, onClick }) => (
+const EventCard = ({ title, date, time, location, onClick, rsvp }) => (
   <button
     onClick={onClick}
     className="w-full text-left bg-gray-700 p-4 rounded-lg shadow-md flex flex-col gap-1 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
@@ -11,6 +11,8 @@ const EventCard = ({ title, date, time, location, onClick }) => (
         <div>📅 {date}</div>
         <div>⏰ {time}</div>
         <div>📍 {location}</div>
+        {rsvp && <div className="text-green-400 font-semibold">
+          ✓ RSVP'd</div>}
       </div>
     </div>
   </button>
