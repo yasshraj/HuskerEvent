@@ -53,11 +53,15 @@ export default function EventSummary({ event, onClose, onRSVP, onDelete }) {
           >
             Delete Event
           </button>
-          <button
+          <button 
             onClick={onRSVP}
-            className="px-4 py-2 rounded-md bg-gray-200 text-gray-900 hover:bg-white font-semibold"
+            className={`px-4 py-2 rounded-md font-semibold ${
+              event.Rsvp 
+                ? 'bg-gray-600 hover:bg-gray-700 text-gray-200' 
+                : 'bg-gray-200 text-gray-900 hover:bg-white'
+            }`}
           >
-            RSVP
+            {event.Rsvp ? 'Un-RSVP' : 'RSVP'}
           </button>
         </div>
       </div>

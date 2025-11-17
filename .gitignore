@@ -8,3 +8,5 @@
 Thumbs.db
 .json
 .cjs
+
+node_modules/

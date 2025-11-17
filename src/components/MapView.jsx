@@ -1,6 +1,6 @@
 // ./components/MapView.jsx
 import React, { useEffect, useRef, useState } from 'react';
-
+// changes
 export default function MapView({ events = [], apiKey }) {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
